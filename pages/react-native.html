@@ -1,0 +1,68 @@
+---
+layout: default
+title: react-native guide
+description:
+---
+<section class="bs-docs-section">
+  <h1 id="first-level" class="page-header">Overview</h1>
+  <p>
+    This is a collection of guides documenting common activities
+    while developing react-native applications.
+  </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="bootstrapping">Bootstrapping</h1>
+  <p>
+    You can use our <a href="https://github.com/codecentric-labs-zero/react-native-project-template/tree/create-generator">Yeoman generator</a> for bootstrapping a new react-native application.
+    Follow the instructions in the README.
+  </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="cd">Continuous delivery</h1>
+  <p>
+    Unfortunately, there are still a lot of manual steps in configuring the continuous delivery pipeline for a mobile application
+    written in react-native. We actively search for better ways of doing this, but in the meantime, you'll need to do the following
+    (please be aware that this guide assumes that you bootstrapped the application as described above):
+  </p>
+  <h3 id="prepare-ios">Preparing the iOS native project files</h2>
+  <p>
+    In order to be able to actually delivery the application via BuddyBuild and iTunes Connect, you will need to modify a few
+    native resources.
+  </p>
+  <h4>1. Product name</h4>
+  <p>
+    In Xcode, inside the project's <code>Build Settings</code>, choose a <code>Product Bundle Identifiers</code>, and a
+    <code>Product Name</code> for <code>Debug</code> and <code>Release</code>.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#productName" aria-expanded="false" aria-controls="productName">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="productName">
+      <img class="img-responsive" src="../assets/images/react-native-product-name.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>2. Code signing</h4>
+  <p>
+    Set up <code>Code Signing Identity</code> to <code>iOS Developer</code> for automated code signing in
+    <a href="https://buddybuild.com">BuddyBuild</a>.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#codeSigning" aria-expanded="false" aria-controls="codeSigning">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="codeSigning">
+      <img class="img-responsive" src="../assets/images/react-native-code-signing.png" />
+    </div>
+    <br/>
+  <h4>3. App icons</h4>
+  <p>
+    Depending on the target platform, add add application icons in <code>Images.xcassets</code>.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#appIcons" aria-expanded="false" aria-controls="appIcons">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="appIcons">
+      <img class="img-responsive" src="../assets/images/react-native-app-icons.png" />
+    </div>
+    <br/>
+  </p>
+</section>

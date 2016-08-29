@@ -1,0 +1,50 @@
+# name of the software
+name: codecentric labs zero
+version: 0.1.0
+
+# list of additional links on the right of the top menu
+headerLinks:
+  - title: GitHub
+    url: https://github.com/codecentric-labs-zero
+
+# list if additional links on the footer
+footerLinks:
+  - title: GitHub
+    url: https://github.com/codecentric-labs-zero
+
+# header
+header:
+  color1: "#8DC1A1"
+  color2: "#42A3C6"
+  trianglify: false
+
+# google analytics
+analytics:
+  account:
+  domain:
+
+# github buttons
+githubButton:
+  user:
+  repo:
+
+# twitter buttons
+twitter:
+  enabled: false
+  via:
+  hash:
+  account:
+
+# facebook buttons
+facebook:
+  enabled: false
+  profileUrl:
+
+
+exclude: ['README.md', 'LICENSE', 'bower.json', 'Gemfile.lock', 'Gemfile']
+
+gems:
+  - jekyll-mentions
+  - jemoji
+  - jekyll-redirect-from
+  - jekyll-sitemap
