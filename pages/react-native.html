@@ -26,7 +26,7 @@ description:
     written in react-native. We actively search for better ways of doing this, but in the meantime, you'll need to do the following
     (please be aware that this guide assumes that you bootstrapped the application as described above):
   </p>
-  <h3 id="prepare-ios">Preparing the iOS native project files</h2>
+  <h3 id="prepare-ios">iOS project files</h3>
   <p>
     In order to be able to actually delivery the application via BuddyBuild and iTunes Connect, you will need to modify a few
     native resources.
@@ -62,6 +62,126 @@ description:
     </button>
     <div class="collapse" id="appIcons">
       <img class="img-responsive" src="../assets/images/react-native-app-icons.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>4. Launch screen</h4>
+  <p>
+    React-native comes with a standard launch screen but you might want to modify it. In Xcode, change <code>LaunchScreen.xib</code>
+    to fit your needs.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#launchScreen" aria-expanded="false" aria-controls="launchScreen">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="launchScreen">
+      <img class="img-responsive" src="../assets/images/react-native-launch-screen.png" />
+    </div>
+    <br/>
+  </p>
+  <h3 id="prepare-ios">Android project files</h3>
+  <p>
+    In order to be able to actually delivery the application via BuddyBuild and Google Play, you will need to modify a few
+    native resources.
+  </p>
+  <h4>1. App icons</h4>
+  <p>
+    You will need to copy app icons for all resolutions to the directories in <code>android/app/src/main/res</code>. Be careful
+    only to override the image ressources. If you are looking for a fast and easy way to create all necessary icons, you can use
+    an <a href="https://appmaker.merq.org/tools/">online app icon creator</a>.
+    <br/>
+  </p>
+  <h4>2. Building an APK</h4>
+  <p>
+    <div class="alert alert-warning" role="alert">You will need to revert the changes made during this step, so be sure to commit first.</div>
+    Before BuddyBuild can deploy your application to Google Play, you will need to upload an APK manually once. You can create this
+    initial APK by following the instructions given in the <a href="https://facebook.github.io/react-native/docs/signed-apk-android.html">react-native documentation</a>.
+    After you have created the APK, be sure to revert the changes you made to your Android project files. BuddyBuild does all the code signing
+    for you.
+    <br/>
+  </p>
+  <h3 id="prepare-ios">Apple Developer</h3>
+  <p>
+    Next, we'll set up the app in our Apple Developer account.
+  </p>
+  <h4>1. Create App ID</h4>
+  <p>
+    In your <a href="https://developer.apple.com/account">Apple Developer account</a>, navigate to <code>Certificates, IDs &amp; Profiles -> Identifiers -> App IDs</code> and create a new App identifier.
+    Be sure to use the <code>Bundle ID</code> you set up for the app when configuring the iOS project files.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#appId" aria-expanded="false" aria-controls="appId">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="appId">
+      <img class="img-responsive" src="../assets/images/react-native-apple-developer.png" />
+    </div>
+    <br/>
+  </p>
+  <h3 id="prepare-ios">iTunes Connect</h3>
+  <p>
+    We also need to set up the application for delivery via iTunes Connect.
+  </p>
+  <h4>1. Create new application</h4>
+  <p>
+    In <a href="https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/">iTunes Connect</a>, navigate to <code>My Apps</code>
+    and click the <code>+</code> button. Follow the instruction to create a new application.
+    <br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#iTunesConnect" aria-expanded="false" aria-controls="iTunesConnect">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="iTunesConnect">
+      <img class="img-responsive" src="../assets/images/react-native-itunes-connect.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>2. Grant permissions</h4>
+  <p>
+    In <a href="https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/">iTunes Connect</a>, navigate to <code>Users &amp; Roles</code>.
+    Assign the newly created app to the codecentric labs zero user by adding it to the list of applications on the <code>Roles</code> tab.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#connectPermissions" aria-expanded="false" aria-controls="connectPermissions">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="connectPermissions">
+      <img class="img-responsive" src="../assets/images/react-native-itunes-connect-permissions.png" />
+    </div>
+    <br/>
+  </p>
+  <h3 id="prepare-ios">Google Play</h3>
+  <p>
+    For the Android version, we will need to set up a new application in Google Play.
+  </p>
+  <h4>1. Create new application</h4>
+  <p>
+    In the <a href="https://play.google.com/apps/publish/">Google Play Developer Console</a>, create a new app by clicking
+    the button.
+    <br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#gplay1" aria-expanded="false" aria-controls="gplay1">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="gplay1">
+      <img class="img-responsive" src="../assets/images/react-native-gplay-1.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>2. Configure the application</h4>
+  <p>
+    Configuring a new application on Google Play is a little bit more involved than the iOS equivalent. Fortunately, you
+    can check what's missing by using the <code>why can't I publish anything</code> link on the upper right corner.
+    <br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#gplay2" aria-expanded="false" aria-controls="gplay2">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="gplay2">
+      <img class="img-responsive" src="../assets/images/react-native-google-play-2.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>3. Upload APK</h4>
+  <p>
+    Once you have finished all other configuration steps, you can upload your APK to the tracks you want BuddyBuild to publish in.
+    <br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#gplay3" aria-expanded="false" aria-controls="gplay3">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="gplay3">
+      <img class="img-responsive" src="../assets/images/react-native-google-play-3.png" />
     </div>
     <br/>
   </p>
