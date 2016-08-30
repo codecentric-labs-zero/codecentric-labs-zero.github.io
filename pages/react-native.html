@@ -213,12 +213,12 @@ description:
     <br/>
   </p>
   <h3 id="buddybuild">BuddyBuild</h3>
+  <div class="alert alert-warning" role="alert">You will need to configure everything twice: Once for the iOS and once for the Android version of the project.</div>
   <p>
     The final step is configuring <a href="https://www.buddybuild.com/">BuddyBuild</a> to build, sign and deploy new version of the application whenever a commit on the
     <code>master</code> branch is detected.
   </p>
   <h4>1. Add projects</h4>
-  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
   <p>
     BuddyBuild can automatically detect and configure react-native builds. All you need to do is add the GitHub repository of the application and
     choose which application should be added. Make sure that BuddyBuild is working on the <code>master</code> branch when doing this.<br/><br/>
@@ -231,7 +231,6 @@ description:
     <br/>
   </p>
   <h4>2. Configure projects</h4>
-  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
   <p>
     First, disable all branches but <code>master</code> by unchecking everything in the branch settings dialogue. Configure <code>master</code> to only
     build on pushes. Also, make sure that only the <code>Release</code> version is being built.<br/><br/>
@@ -244,7 +243,6 @@ description:
     <br/>
   </p>
   <h4>3. Code signing</h4>
-  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
   <p>
     Go to each project's settings and follow the instructions given on the application signing pages. For iOS, this will include exporting and
     uploading your certificates. For Android, you will need to create and upload a keystore.<br/><br/>
@@ -261,7 +259,6 @@ description:
     <br/>
   </p>
   <h4>4. Configure deployments</h4>
-  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
   <p>
     Go to each project's deployment tab and set up delivery via BuddyBuild for each build of the <code>master</code> branch, adding members to the test groups as needed. Configure
     deployments via Testflight and Google Play Alpha or Beta channels to happen once a day from the <code>master</code> branch. Please note that you will need <tbody>
