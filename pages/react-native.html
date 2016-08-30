@@ -77,7 +77,7 @@ description:
     </div>
     <br/>
   </p>
-  <h3 id="prepare-ios">Android project files</h3>
+  <h3 id="prepare-android">Android project files</h3>
   <p>
     In order to be able to actually delivery the application via BuddyBuild and Google Play, you will need to modify a few
     native resources.
@@ -90,15 +90,15 @@ description:
     <br/>
   </p>
   <h4>2. Building an APK</h4>
+  <div class="alert alert-warning" role="alert">You will need to revert the changes made during this step, so be sure to commit first.</div>
   <p>
-    <div class="alert alert-warning" role="alert">You will need to revert the changes made during this step, so be sure to commit first.</div>
     Before BuddyBuild can deploy your application to Google Play, you will need to upload an APK manually once. You can create this
     initial APK by following the instructions given in the <a href="https://facebook.github.io/react-native/docs/signed-apk-android.html">react-native documentation</a>.
     After you have created the APK, be sure to revert the changes you made to your Android project files. BuddyBuild does all the code signing
     for you.
-    <br/>
+    <br/><br/>
   </p>
-  <h3 id="prepare-ios">Apple Developer</h3>
+  <h3 id="apple-developer">Apple Developer</h3>
   <p>
     Next, we'll set up the app in our Apple Developer account.
   </p>
@@ -114,7 +114,7 @@ description:
     </div>
     <br/>
   </p>
-  <h3 id="prepare-ios">iTunes Connect</h3>
+  <h3 id="itunes-connect">iTunes Connect</h3>
   <p>
     We also need to set up the application for delivery via iTunes Connect.
   </p>
@@ -143,7 +143,7 @@ description:
     </div>
     <br/>
   </p>
-  <h3 id="prepare-ios">Google Play</h3>
+  <h3 id="google-play">Google Play</h3>
   <p>
     For the Android version, we will need to set up a new application in Google Play.
   </p>
@@ -182,6 +182,102 @@ description:
     </button>
     <div class="collapse" id="gplay3">
       <img class="img-responsive" src="../assets/images/react-native-google-play-3.png" />
+    </div>
+    <br/>
+  </p>
+  <h3 id="circleci">CircleCI</h3>
+  <p>
+    <a href="https://circleci.com">CircleCI</a> will be used to automatically merge into <code>master</code> and tag a release whenever changes are pushed
+    to <code>develop</code> and all tests are green. We will later set up BuddyBuild to publish the application from
+    <code>master</code> to enable continuous delivery.
+  </p>
+  <h4>1. Add project</h4>
+  <p>
+    In the <a href="https://circleci.com/dashboard">CircleCI dashboard</a>, add the app's GitHub repository as a new project.
+    A <code>circle.yml</code> and a merge script are created during bootstrap, so no additional build configuration is required.
+  <br/>
+  </p>
+  <h4>2. Grant write access</h4>
+  <p>
+    By default, only read access is granted to CircleCI. To enable write access, you will need to create an additional SSH and add
+    it to CircleCI and GitHub. Follow these <a href="https://circleci.com/docs/adding-read-write-deployment-key/">instructions</a>.
+    <br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#circleKey" aria-expanded="false" aria-controls="circleKey">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="circleKey">
+      <img class="img-responsive" src="../assets/images/react-native-ssh-circleci.png" />
+      <br/>
+      <img class="img-responsive" src="../assets/images/react-native-ssh-github.png" />
+    </div>
+    <br/>
+  </p>
+  <h3 id="buddybuild">BuddyBuild</h3>
+  <p>
+    The final step is configuring <a href="https://www.buddybuild.com/">BuddyBuild</a> to build, sign and deploy new version of the application whenever a commit on the
+    <code>master</code> branch is detected.
+  </p>
+  <h4>1. Add projects</h4>
+  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
+  <p>
+    BuddyBuild can automatically detect and configure react-native builds. All you need to do is add the GitHub repository of the application and
+    choose which application should be added. Make sure that BuddyBuild is working on the <code>master</code> branch when doing this.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bbNewProject" aria-expanded="false" aria-controls="bbNewProject">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="bbNewProject">
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-1.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>2. Configure projects</h4>
+  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
+  <p>
+    First, disable all branches but <code>master</code> by unchecking everything in the branch settings dialogue. Configure <code>master</code> to only
+    build on pushes. Also, make sure that only the <code>Release</code> version is being built.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bbConfiguration" aria-expanded="false" aria-controls="bbConfiguration">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="bbConfiguration">
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-2.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>3. Code signing</h4>
+  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
+  <p>
+    Go to each project's settings and follow the instructions given on the application signing pages. For iOS, this will include exporting and
+    uploading your certificates. For Android, you will need to create and upload a keystore.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bbSigning" aria-expanded="false" aria-controls="bbSigning">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="bbSigning">
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-settings.png" />
+      <br/>
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-3.png" />
+      <br/>
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-4.png" />
+    </div>
+    <br/>
+  </p>
+  <h4>4. Configure deployments</h4>
+  <div class="alert alert-warning" role="alert">You will need to do this twice: Once for the iOS and once for the Android version of the project.</div>
+  <p>
+    Go to each project's deployment tab and set up delivery via BuddyBuild for each build of the <code>master</code> branch, adding members to the test groups as needed. Configure
+    deployments via Testflight and Google Play Alpha or Beta channels to happen once a day from the <code>master</code> branch. Please note that you will need <tbody>
+    connect BuddyBuild with the target marketplace. Follow the instructions given on the deployment pages and make sure that you deploy <thead>
+    release variant of the application.<br/><br/>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#bbDeployments" aria-expanded="false" aria-controls="bbDeployments">
+      Show/hide Screenshot
+    </button>
+    <div class="collapse" id="bbDeployments">
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-deployments.png" />
+      <br/>
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-5.png" />
+      <br/>
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-6.png" />
+      <br/>
+      <img class="img-responsive" src="../assets/images/react-native-buddybuild-7.png" />
     </div>
     <br/>
   </p>
