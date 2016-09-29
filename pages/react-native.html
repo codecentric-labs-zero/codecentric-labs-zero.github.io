@@ -54,9 +54,9 @@ description:
       <img class="img-responsive" src="../assets/images/react-native-code-signing.png" />
     </div>
     <br/>
-  <h4>3. App icons</h4>
+  <h4>3. App icons (optional)</h4>
   <p>
-    Depending on the target platform, add add application icons in <code>Images.xcassets</code>.<br/><br/>
+    Depending on the target platform, modify default application icons in <code>Images.xcassets</code>.<br/><br/>
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#appIcons" aria-expanded="false" aria-controls="appIcons">
       Show/hide Screenshot
     </button>
@@ -82,9 +82,9 @@ description:
     In order to be able to actually delivery the application via BuddyBuild and Google Play, you will need to modify a few
     native resources.
   </p>
-  <h4>1. App icons</h4>
+  <h4>1. App icons (optional)</h4>
   <p>
-    You will need to copy app icons for all resolutions to the directories in <code>android/app/src/main/res</code>. Be careful
+    If you want to override the default icons, you will need to copy app icons for all resolutions to the directories in <code>android/app/src/main/res</code>. Be careful
     only to override the image ressources. If you are looking for a fast and easy way to create all necessary icons, you can use
     an <a href="https://appmaker.merq.org/tools/">online app icon creator</a>.
     <br/>
@@ -163,7 +163,8 @@ description:
   <h4>2. Configure the application</h4>
   <p>
     Configuring a new application on Google Play is a little bit more involved than the iOS equivalent. Fortunately, you
-    can check what's missing by using the <code>why can't I publish anything</code> link on the upper right corner.
+    can check what's missing by using the <code>why can't I publish anything</code> link on the upper right corner. For your
+    convenience, we included default media for this step in the project's <code>default-assets</code> folder.
     <br/><br/>
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#gplay2" aria-expanded="false" aria-controls="gplay2">
       Show/hide Screenshot
