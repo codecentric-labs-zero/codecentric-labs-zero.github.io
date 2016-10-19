@@ -1,6 +1,6 @@
 ---
 layout: default
-title: react-native guide
+title: React Native guide
 description:
 ---
 <section class="bs-docs-section">
@@ -281,4 +281,95 @@ description:
     </div>
     <br/>
   </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="unit-testing">Unit Testing</h1>
+  <p>
+    We use a custom unit test setup for our React Native applications. It consists of babel compiler configurations, additional mocha options and a custom bootstrap script
+    based on this <a href="https://blog.addjam.com/testing-react-native-with-mocha-and-enzyme-6b77cd9e52a1#.63vcf0mgz">blog post</a>. You can have a look at the
+    <a href="https://github.com/codecentric-labs-zero/react-native-project-template/tree/create-generator/generator-cclz-react-native/app/templates/test">test directory</a>
+    in our template to see the details.
+  </p>
+  <h3 id="test-libraries">Libraries</h3>
+  <p>
+    We use the following libraries for writing and running unit tests:
+  </p>
+  <ul>
+    <li><a href="http://mochajs.org/">Mocha</a> as test-runner</li>
+    <li><a href="http://sinonjs.org/">Sinon.JS</a> for test doubles</li>
+    <li><a href="http://chaijs.com/">Chai</a> for assertions (with <a href="https://github.com/domenic/sinon-chai">sinon-chain</a> for nicer syntax when using test doubles)</li>
+    <li><a href="https://github.com/thlorenz/proxyquire">Proxyquire</a> for stubbing out imports</li>
+    <li><a href="https://github.com/arnaudbenard/redux-mock-store">redux-mock-store</a> for testing actions</li>
+    <li>
+      <a href="https://github.com/airbnb/enzyme">Enzyme</a> for testing components and containers
+      (with <a href="https://github.com/tmpvar/jsdom">jsdom</a> and <a href="https://github.com/rstacruz/jsdom-global">jsdom-global</a> when we need to use <code>mount</code>)
+    </li>
+  </ul>
+  <h3 id="running-tests">Running the tests</h3>
+  <p>
+    To run the tests, we added to scripts to our <code><a href="https://github.com/codecentric-labs-zero/react-native-project-template/blob/create-generator/generator-cclz-react-native/app/templates/package.json">package.json</a></code> file.
+    From the command line, you can use them with <code>npm test</code> (single execution) or <code>npm run test-watch</code> (multiple execution).
+    If you want to run them inside <a href="https://www.jetbrains.com/webstorm/">WebStorm</a>, you will need to configure additional options for you mocha run configuration:
+    <br/><br/>
+    <img class="img-responsive" src="../assets/images/webstorm-run-configuration.png" />
+    <br/><br/>
+    As <a href="https://circleci.com/">CircleCI</a> is automatically running <code>npm test</code>, no additional setup is needed for continuous integration.
+  </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="libraries">Libraries and components</h1>
+  <p>We found the following libraries helpful.</p>
+  <h3 id="business-logic">Business logic</h3>
+  <p>
+    We use the <a href="https://facebook.github.io/flux/docs/overview.html">Flux architecture</a> when building React Native applications. For implementing it, we
+    use the following libraries:
+  </p>
+  <ul>
+    <li><a href="https://github.com/reactjs/redux">Redux</a> as Flux implementation</li>
+    <li><a href="https://github.com/reactjs/react-redux">React Redux</a> for React bindings</li>
+    <li><a href="https://github.com/gaearon/redux-thunk">Redux Thunk</a> for implementing asynchronous actions</li>
+    <li><a href="https://github.com/rt2zz/redux-persist">Redux Persist</a> for persisting state in between sessions</li>
+    <li><a href="https://github.com/KELiON/redux-async-initial-state">Redux Async Initial State</a> if we need to asynchronously initialize our Redux store</li>
+  </ul>
+  <h3 id="hardware-access">Hardware access</h3>
+  <p>
+    We have had good experiences with the following libraries for accessing hardware:
+  </p>
+  <ul>
+    <li>
+      <a href="https://github.com/lwansbrough/react-native-camera">react-native-camera</a> (iOS) and
+      <a href="https://github.com/ideacreation/react-native-barcodescanner">react-native-barcodescanner</a> (Android)
+      for using the camera to scan barcodes.
+    </li>
+    <li>
+      <a href="https://github.com/rusel1989/react-native-bluetooth-serial">react-native-bluetooth-serial</a> for establishing serial connections via bluetooth
+    </li>
+    <li>
+      <a href="https://github.com/zmxv/react-native-sound">react-native-sound</a> for playing sound files
+    </li>
+  </ul>
+  <h3 id="navigation">Navigation</h3>
+  <p>
+    After struggling with <a href="https://github.com/aksonov/react-native-redux-router">react-native-redux-router's</a> abstractions, we decided to implement
+    our own navigation and routing stack with the <a href="https://github.com/facebook/react-native/tree/master/Libraries/CustomComponents/NavigationExperimental">NavigationExperimental</a>
+    primitives when we need to. We found <a href="https://github.com/aksonov/react-native-tabs">react-native-tabs</a> to work fine for us when implementing tabbed navigation.
+  </p>
+  <h3 id="typography">Typography and Icons</h3>
+  <p>
+    We use <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a> a lot.
+  </p>
+  <h3 id="stylesheet">Stylesheets</h3>
+  <p>
+    To work around rendering differences on Android and iOS, we usually use <a href="https://github.com/knowbody/react-native-platform-stylesheet">react-native-platform-stylesheet</a>
+  </p>
+  <h3 id="backend-communication">Communication with backends</h3>
+  <p>
+    We use the following libraries when having the need for backend communication:
+  </p>
+  <ul>
+    <li><a href="https://github.com/mzabriskie/axios">axios</a> for HTTP-based communication (with <a href="https://github.com/ctimmerm/axios-mock-adapter">axios-mock-adapter</a> for testing)</li>
+    <li><a href="https://github.com/evollu/react-native-fcm">react-native-fcm</a> for push notifications with <a href="https://firebase.google.com/docs/cloud-messaging/">Firebase Cloud Messaging</a></li>
+  </ul>
 </section>
