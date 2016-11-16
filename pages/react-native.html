@@ -319,6 +319,65 @@ description:
 </section>
 
 <section class="bs-docs-section">
+  <h1 id="functional-testing">Functional Testing</h1>
+  <p>
+    We use <a href="http://appium.io/">appium</a> for functional testing. To run our appium tests as part of our continuous delivery pipeline, we use <a href="http://bitbar.com/">Bitbar Testing (Testdroid)</a> and
+    a <a href="http://docs.buddybuild.com/docs/custom-prebuild-and-postbuild-steps">custom build step on BuddyBuild</a>. The following sections describe our approach.
+  </p>
+  <h3 id="install-appium">Install appium</h3>
+  <p>
+    Follow the <a href="http://appium.io/slate/en/master/?javascript#setting-up-appium">instructions</a> to install appium for your platform.
+  </p>
+  <h3 id="preparing-the-app">Preparing the App</h3>
+  <p>
+    We write our actual tests with <a href="https://github.com/admc/wd">WD.js</a>, which you will need to install via <code>rpm install --save-dev wd</code>.
+    In order to execute the tests locally and on BuddyBuild, we use a npm script:
+    <code>
+      "functional-tests": "mocha --opts test/mocha.opts './specs/**/*.spec.js'"
+    </code>
+  </p>
+  <h3 id="preparing-bitbar">Preparing Bitbar</h3>
+  <p>
+    In your <a href="https://cloud.testdroid.com/#service/projects">Bitbar project overview</a>, you need to create a new project. Make sure to choose the right type
+    (either "Appium Android" or "Appium iOS") from the drop down. You will need to use the exact project name when setting up your WD test later on.
+    <br/><br/>
+    <img class="img-responsive" src="../assets/images/bitbar-project.png" />
+    <br/><br/>
+    Also, <a href="https://cloud.testdroid.com/#service/devicegroups">find the device</a> you want to use and note it's name.
+    <br/><br/>
+    <img class="img-responsive" src="../assets/images/bitbar-device.png" />
+    <br/><br/>
+  </p>
+  <h3 id="preparing-buddybuild">Preparing BuddyBuild</h3>
+  <p>
+    In order to have BuddyBuild run the appium tests on Testdroid, we need to set up some environment variables. <code>TESTDROID</code> needs to be set
+    to <code>1</code>. Also, you will need to set <code>TESTDROID_API</code> to the API key found on your <a href="https://cloud.testdroid.com/#service/my-account">Testdroid</a>
+    account page.
+    At this point, we will also add the <a href="https://gist.github.com/nilswloka/1ba5ae100187ce1a6e741a471cb36348#file-buddybuild_postbuild-sh">custom build script</a>
+    to our project. Please note that the script needs to be <a href="http://docs.buddybuild.com/docs/custom-prebuild-and-postbuild-steps#section-post-build">inside the native project folder</a>.
+    The example given here is for an Android project. For iOS projects, you can use <code>$BUDDYBUILD_IPA_PATH</code> directly. The build script will upload the latest
+    version of the app to Testdroid, export its file name as environment variable and start the functional tests.
+  </p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#buddybuild-env" aria-expanded="false" aria-controls="productName">
+    Show/hide Screenshot
+  </button>
+  <div class="collapse" id="buddybuild-env">
+    <img class="img-responsive" src="../assets/images/buddybuild-testdroid-env.png" />
+  </div>
+  <br/>
+  </p>
+  <h3 id="writing-the-functional-test">Writing the functional test</h3>
+  <p>
+    Have a look at <a href="https://gist.github.com/nilswloka/1ba5ae100187ce1a6e741a471cb36348#file-example-spec-js">an example</a> to see how to set up WD.js to run both
+    locally and on BuddyBuild. For more information on how to configure the required properties, have a look at the <a href="http://docs.testdroid.com/appium/testdroid-desired-caps/">Testdroid documentation</a>.
+  </p>
+  <h3 id="running-functional-tests-locally">Running the tests locally</h3>
+  <p>
+    Start the appium server with <code>appium</code>, then run the tests with <code>npm run functional-test</code>.
+  </p>
+</section>
+
+<section class="bs-docs-section">
   <h1 id="libraries">Libraries and components</h1>
   <p>We found the following libraries helpful.</p>
   <h3 id="business-logic">Business logic</h3>
