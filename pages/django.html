@@ -1,0 +1,142 @@
+---
+layout: default
+title: Django guide
+description:
+---
+<section class="bs-docs-section">
+  <h1 id="first-level" class="page-header">Overview</h1>
+  <p>
+    This is a collection of guides documenting common activities
+    while developing django applications.
+  </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="bootstrapping">Bootstrapping</h1>
+  <p>
+    We are using our  <a href="https://github.com/codecentric-labs-zero/django-project-template">Django project template</a>  for bootstrapping a new django application.
+    <br>
+    If you have done this before there is a tl:dr version of the instructions for bootstraping and continuous deliver in the README of our template.
+    <br>
+    <h3>Creating new project:</h3>
+    You can create a new project from our template by running this inside a Python 3 virtual environment:<br>
+    <p class="text-danger">***Change [project_name] with the real project name (do not use special characters)***</p>
+    <code><br>
+      $ virtualenv --python=python3 venv<br>
+      $ . venv/bin/activate<br>
+      $ pip install Django==1.10<br>
+      $ venv/bin/django-admin startproject [project_name] \<br>
+      --template https://github.com/codecentric-labs-zero/django-project-template/archive/master.zip \<br>
+      --name .flooignore,.gitignore,Procfile,.env \<br>
+      --extension py,md,txt,sh,ini,yml<br>
+    </code>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="cd">Continuous delivery</h1>
+  <p>
+    In the template there is a script <code>bootstrap.sh</code> that we use to setup continuous delivery on heroku and circleci.<br>
+    This script will create github project and set it up on heroku and circleci so it is important that you are part of codecentric-labs-zero<br>
+    organizations on Heroku and GitHub so you would be granted permisions for creating projects and apps.<br>
+    Please note that this can and should only be done once for a project.
+  </p>
+  <p>Before starting the bootstrap.sh script you need to configure your GITHUB_TOKEN, CIRCLE_TOKEN and to login to Heroku console.<br>
+    First if necessary, make script executable:<br>
+    <code>$ chmod u+x bootstrap.sh</code>
+  </p>
+  <p>
+    Export GITHUB_TOKEN and CIRCLE_TOKEN:<br>
+    <code><br>
+      $ export GITHUB_TOKEN=[your github token]<br>
+      $ export CIRCLE_TOKEN=[your circle token]
+    </code>
+  </p>
+  <p>
+    Login to Heroku console:<br>
+    <code>
+      $ heroku login
+    </code>
+  </p>
+  <p>
+    Start bootstrap script:<br>
+    <code>
+      $ ./bootstrap.sh
+    </code>
+  </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="wcd">Setting up without continuous delivery</h1>
+  <p>
+  If you prefer not to set up the delivery pipeline, you can simply prepare the project for development:
+  </p>
+  <p>
+    Make scripts executable:<br>
+    <code>$ chmod u+x manage.py<br>
+          $ chmod u+x merge-base-ff.sh
+    </code>
+  </p>
+  <p>
+   Delete bootstrap script:<br>
+    <code>
+      $ rm bootstrap.sh
+    </code>
+  </p>
+  <p>
+    Add project name to README file, install requirements, migrate db and git init the project:<br>
+    <code><br>
+      $ echo "# [project name]" > README.md<br>
+      $ pip install -r requirements.txt<br>
+      $ ./manage.py migrate<br>
+      $ py.test<br>
+      $ git init<br>
+      $ git commit -am "Initial project setup"
+    </code>
+  </p>
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="unit-testing">Unit Testing</h1>
+  <p>
+  Add unit testing
+  </p>
+
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="functional-testing">Functional Testing</h1>
+  <p>
+    We use <a href="http://docs.seleniumhq.org/">selenium</a> for functional testing.<br>
+    To run our functional tests you need a runing selenium server with chromedriver on your machine.
+  </p>
+  <h3 id="install-appium">Install selenium</h3>
+  <p>
+    You just need to download selenium and run it.<br>
+    Download <a href="http://docs.seleniumhq.org/download/">selenium</a><br>
+    Download <a href="https://sites.google.com/a/chromium.org/chromedriver/downloads">chromeDriver</a><br>
+  </p>
+  <h3 id="run-selenium">Run selenium</h3>
+  <h4 id="run-selenium-linux-mac">Run selenium on linux/mac</h4>
+  <p>
+    Move chromeDriver from download folder to: <code>/usr/local/share/chromedriver</code><br>
+    <code>
+    sudo mv -f ~/Downloads/chromedriver /usr/local/share/chromedriver<br>
+    </code>
+    Make chromeDriver executable<br>
+    <code>
+    chmod +x ~/usr/local/share/chromedriver
+    </code>
+  </p>
+  <h4 id="run-selenium-linux-mac">Run selenium on windows</h4>
+  <p>
+    <code>
+      lol
+    </code>
+  </p>
+
+</section>
+
+<section class="bs-docs-section">
+  <h1 id="libraries">Libraries and components</h1>
+
+</section>
