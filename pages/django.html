@@ -20,7 +20,7 @@ description:
     <br>
     <h3>Creating new project:</h3>
     You can create a new project from our template by running this inside a Python 3 virtual environment:<br>
-    <p class="text-danger">***Change [project_name] with the real project name (do not use special characters)***</p>
+    <span class="text-danger">***Change [project_name] with the real project name (do not use special characters)***</span>
     <code><br>
       $ virtualenv --python=python3 venv<br>
       $ . venv/bin/activate<br>
@@ -33,7 +33,7 @@ description:
 </section>
 
 <section class="bs-docs-section">
-  <h1 id="cd">Continuous delivery</h1>
+  <h1 id="cd">Setting up <span class="text-success">with</span> continuous delivery</h1>
   <p>
     In the template there is a script <code>bootstrap.sh</code> that we use to setup continuous delivery on heroku and circleci.<br>
     This script will create github project and set it up on heroku and circleci so it is important that you are part of codecentric-labs-zero<br>
@@ -66,7 +66,7 @@ description:
 </section>
 
 <section class="bs-docs-section">
-  <h1 id="wcd">Setting up without continuous delivery</h1>
+  <h1 id="wcd">Setting up <span class="text-danger">without</span> continuous delivery</h1>
   <p>
   If you prefer not to set up the delivery pipeline, you can simply prepare the project for development:
   </p>
@@ -96,15 +96,7 @@ description:
 </section>
 
 <section class="bs-docs-section">
-  <h1 id="unit-testing">Unit Testing</h1>
-  <p>
-  Add unit testing
-  </p>
-
-</section>
-
-<section class="bs-docs-section">
-  <h1 id="functional-testing">Functional Testing</h1>
+  <h1 id="setup-testing">Setup Testing</h1>
   <p>
     We use <a href="http://docs.seleniumhq.org/">selenium</a> for functional testing.<br>
     To run our functional tests you need a runing selenium server with chromedriver on your machine.
@@ -119,24 +111,65 @@ description:
   <h4 id="run-selenium-linux-mac">Run selenium on linux/mac</h4>
   <p>
     Move chromeDriver from download folder to: <code>/usr/local/share/chromedriver</code><br>
+    <span class="text-success">*** you do not have to move it there(you can have it wher ever you wont) but if you move it to that specific folder<br>
+    you wont need to tell selenium where the driver is every time you start it.***</span><br>
     <code>
     sudo mv -f ~/Downloads/chromedriver /usr/local/share/chromedriver<br>
     </code>
     Make chromeDriver executable<br>
     <code>
     chmod +x ~/usr/local/share/chromedriver
-    </code>
-  </p>
-  <h4 id="run-selenium-linux-mac">Run selenium on windows</h4>
-  <p>
+  </code><br>
+    Run selenium<br>
     <code>
-      lol
+      java -jar -Dwebdriver.chrome.driver=/[path to chromedriver]/chromedriver ~/[path to selenium]/selenium-server-standalone.jar <br>
+    </code>
+    <span>Example:</span><br>
+      <code>
+      java -jar -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver ~/Downloads/selenium-server-standalone.jar
+    </code>
+    <span>If you moved chromdriver to <code>/usr/local/share/</code>:</span><br>
+      <code>
+      java -jar ~/Downloads/selenium-server-standalone.jar
+    </code>
+
+  </p>
+  <h4 id="run-selenium-windows">Run selenium on windows</h4>
+  <p>
+    To run selenium on windows you need to start it with variable Dwebdriver.chrome.driver wich is pointing to your chromedriver<br>
+    <code>
+      java jar -Dwebdriver.chrome.driver=/[path to chromedriver]/chromedriver ~/[path to selenium]/selenium-server-standalone.jar
+    </code><br>
+    <span>Example:</span><br>
+      <code>
+      java -jar -Dwebdriver.chrome.driver=/Downloads/chromedriver ~/Downloads/selenium-server-standalone.jar
     </code>
   </p>
+
 
 </section>
 
 <section class="bs-docs-section">
-  <h1 id="libraries">Libraries and components</h1>
+  <h1 id="running-tests-pycharm">Running tests from pycharm</h1>
+  <p>
+    From pycharm toolbar menu go to:<br>
+<ul>
+    <li>Run/Edit configuration<br></li>
+    <li>In Run/Debug configuration window clik on + to add new run configuration<br></li>
+    <li>Select Python tests<br></li>
+    <li>Select py.test<br></li>
+    <li>Set Target to root folder of project<br></li>
+    <li>Add three Enviroment Variables:<br>
+    <code><br>
+    SECRET_KEY=whatevervalue<br>
+    DJANGO_SECRET_KEY=whatevervalue<br>
+    SELENIUM_URI=http//localhost:4444/wd/hub
+    </code><br></li>
+    <li>Run this configuration</li>
+</ul>
+
+
+
+  </p>
 
 </section>
