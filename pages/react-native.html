@@ -286,8 +286,7 @@ description:
 <section class="bs-docs-section">
   <h1 id="unit-testing">Unit Testing</h1>
   <p>
-    We use a custom unit test setup for our React Native applications. It consists of babel compiler configurations, additional mocha options and a custom bootstrap script
-    based on this <a href="https://blog.addjam.com/testing-react-native-with-mocha-and-enzyme-6b77cd9e52a1#.63vcf0mgz">blog post</a>. You can have a look at the
+    After the latest changes to Jest, we recently switched back to using the default React Native test setup. You can have a look at the
     <a href="https://github.com/codecentric-labs-zero/react-native-project-template/tree/create-generator/generator-cclz-react-native/app/templates/test">test directory</a>
     in our template to see the details.
   </p>
@@ -296,24 +295,16 @@ description:
     We use the following libraries for writing and running unit tests:
   </p>
   <ul>
-    <li><a href="http://mochajs.org/">Mocha</a> as test-runner</li>
-    <li><a href="http://sinonjs.org/">Sinon.JS</a> for test doubles</li>
-    <li><a href="http://chaijs.com/">Chai</a> for assertions (with <a href="https://github.com/domenic/sinon-chai">sinon-chain</a> for nicer syntax when using test doubles)</li>
-    <li><a href="https://github.com/thlorenz/proxyquire">Proxyquire</a> for stubbing out imports</li>
+    <li><a href="https://facebook.github.io/jest/">Jest</a> as test-runner, for test doubles and for assertions</li>
     <li><a href="https://github.com/arnaudbenard/redux-mock-store">redux-mock-store</a> for testing actions</li>
     <li>
-      <a href="https://github.com/airbnb/enzyme">Enzyme</a> for testing components and containers
-      (with <a href="https://github.com/tmpvar/jsdom">jsdom</a> and <a href="https://github.com/rstacruz/jsdom-global">jsdom-global</a> when we need to use <code>mount</code>)
+      <a href="https://github.com/airbnb/enzyme">Enzyme</a> and <a href="https://github.com/thejameskyle/react-test-renderer">react-test-renderer</a> for testing components and containers
     </li>
   </ul>
   <h3 id="running-tests">Running the tests</h3>
   <p>
-    To run the tests, we added to scripts to our <code><a href="https://github.com/codecentric-labs-zero/react-native-project-template/blob/create-generator/generator-cclz-react-native/app/templates/package.json">package.json</a></code> file.
-    From the command line, you can use them with <code>npm test</code> (single execution) or <code>npm run test-watch</code> (multiple execution).
-    If you want to run them inside <a href="https://www.jetbrains.com/webstorm/">WebStorm</a>, you will need to configure additional options for you mocha run configuration:
-    <br/><br/>
-    <img class="img-responsive" src="../assets/images/webstorm-run-configuration.png" />
-    <br/><br/>
+    You can run the tests from the command line by executing <code>npm test</code>. For <a href="https://www.jetbrains.com/webstorm/">WebStorm</a>, there is no dedicated Jest test runner
+    yet, but you can create a test run configuration by following <a href="https://youtrack.jetbrains.com/issue/WEB-14979#comment=27-1518879">these instructions</a>.
     As <a href="https://circleci.com/">CircleCI</a> is automatically running <code>npm test</code>, no additional setup is needed for continuous integration.
   </p>
 </section>
@@ -331,10 +322,22 @@ description:
   <h3 id="preparing-the-app">Preparing the App</h3>
   <p>
     We write our actual tests with <a href="https://github.com/admc/wd">WD.js</a>, which you will need to install via <code>rpm install --save-dev wd</code>.
-    In order to execute the tests locally and on BuddyBuild, we use a npm script:
+    In order to execute the tests locally and on BuddyBuild, we use a npm script:<br/><br/>
     <code>
-      "functional-tests": "mocha --opts test/mocha.opts './specs/**/*.spec.js'"
+      "functional-tests": "jest --config=jest-functional-tests.json"
     </code>
+    <br/><br/>
+    Have a look at <a href="https://gist.github.com/nilswloka/1ba5ae100187ce1a6e741a471cb36348#file-jest-functional-tests-json">a sample configuration file</a> for
+    the details.
+    We will also need to exclude our specs from the normal test runs by adding<br/><br/>
+    <code>
+      "testPathIgnorePatterns": [
+        "&lt;rootDir&gt;/specs/",
+        "&lt;rootDir&gt;/node_modules/"
+      ]
+    </code>
+    <br/><br/>
+    to the Jest configuration block.
   </p>
   <h3 id="preparing-bitbar">Preparing Bitbar</h3>
   <p>
