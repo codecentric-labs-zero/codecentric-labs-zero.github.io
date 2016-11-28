@@ -435,3 +435,33 @@ description:
     <li><a href="https://github.com/evollu/react-native-fcm">react-native-fcm</a> for push notifications with <a href="https://firebase.google.com/docs/cloud-messaging/">Firebase Cloud Messaging</a></li>
   </ul>
 </section>
+<section class="bs-docs-section">
+  <h1 id="apteligentIntegration">Mobile monitoring with apteligent</h1>
+  <p>We are using <a href="https://www.apteligent.com/">Apteligent</a> for monitoring of mobile applications.<br/>
+    Steps for integrating apteligent into mobile application for android are:
+    <ul>
+      <li>Register the application on your apteligent account</li>
+      <li>In apps build.grade file add dependency<br/>
+        <code>compile 'com.crittercism:crittercism-android-agent:+'</code>
+      </li>
+      <li>In AndroidManifest.xml file add the following permissions:<br/>
+        <code>&lt;uses-permission android:name="android.permission.INTERNET"/&gt;</code><br/>
+        <code>&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/&gt;</code>
+      </li>
+      <li>
+        In MainActivity.java file add imports<br/>
+        <code>import com.crittercism.app.Crittercism;</code><br/>
+        <code>import android.os.Bundle;</code><br/>
+        and override onCreate method:<br/>
+        <code>
+          @Override</code><br/>
+          <code>protected void onCreate(Bundle bundleInstance) {</code><br/>
+            <code>super.onCreate(bundleInstance);</code><br/>
+            <code>Crittercism.initialize(getApplicationContext(), "CRITTERCISM_APP_ID");</code><br/>
+          <code>}</code></br>
+        CRITTERCISM_APP_ID can be found in App settings when you access the application<br/>
+        registered in the first step.
+      </li>
+    </ul>
+  </p>
+</section>
