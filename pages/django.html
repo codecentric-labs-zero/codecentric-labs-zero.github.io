@@ -208,3 +208,32 @@ description:
 
   </p>
 </section>
+<section class="bs-docs-section">
+  <h1 id="new-relic-integration">New Relic integration</h1>
+  <p>For django app monitoring we are using<a href="https://newrelic.com/"> New Relic</a>,<br/>
+    which is now included into Django app template.<br/>
+    Steps for setting up New Relic on application that is deployed to Heroku are:<br/>
+    <ul>
+    <li>Install New Relic addon by using heroku toolbelt<br/>
+      <code>heroku --app appName addons:create newrelic:$planlevel</code>
+    </li>
+    <li>Give you application unique name<br/>
+      <code>heroku --app appName config:set NEW_RELIC_APP_NAME='Your Application Name'</code>
+    </li>
+    <li>Add newrelic dependency to requirements.txt file, you can specify the version</li>
+    <code>newrelic==n.n.n.n</code>
+    </li>
+    <li>Modify web entry of Procfile by prefixing newrelic-admin run-program, for example<br/>
+      <code>web: newrelic-admin run-program gunicorn mysite.wsgi</code>
+    </li>
+    <li>To verify that New Relic is enabled run<br/>
+      <code>heroku --app appName env | grep NEW_RELIC</code>
+    </li>
+    <li>Write a ticket to New Relic <a href="https://support.newrelic.com/">support</a> to <br/>
+      get the admin rights, because default accounts created through Heroku have user status.</br>
+    </li>
+    <li>After getting admin status you can set up alerts by going to New Relic site throught Heroku<br/>
+      Alerts > the alert policy for appName > Channels and groups > Create channel
+    </ul>
+  </p>
+</section>
